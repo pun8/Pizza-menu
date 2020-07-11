@@ -1,5 +1,4 @@
 <?php
-
     include('config/db_connect.php');   
     
     $email = $title = $ingredients = '';
@@ -54,13 +53,17 @@
 ?>
 
 <!DOCTYPE html>
-    <?php include('templates/header.php')?>
-
+    <?php 
+    include('templates/header.php');
+    if(!isset($_SESSION['Uid'])){
+        header('Location:login.php?error=loggedout');
+        exit();
+    }?>
     <section class="container grey-text">
     <h4 class = "center">Add a Pizza</h4>
     <form class="white" action="" method="POST">
-        <label for="">YOur email</label>
-        <input type="text" name="email" value=<?php echo htmlspecialchars($email) ?>> 
+        <label for="">Created By</label>
+        <input type="text" name="email" value=<?php echo $_SESSION['email'] ?> readonly> 
         <div class="red-text"><?php echo $errors['email'] ?></div>
         <label for="">Pizza title</label>
         <input type="text" name="title" value=<?php echo htmlspecialchars($title) ?>>

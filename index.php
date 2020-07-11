@@ -17,7 +17,15 @@
 <!DOCTYPE html>
     <?php include('templates/header.php')?>
 
-    <h4 class='center grey-text'>PIZZASSS</h4>
+    <?php
+    
+    if(isset($_SESSION['Uid'])){
+      echo '<h4 class=\'center grey-text\'> You can add recipes!</h4>';
+    } else{
+      echo '<h4 class=\'center grey-text\'> Please login to add a pizza</h4>';
+    }
+    ?>
+    
     <div class="container">
       <div class="row">
 

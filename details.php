@@ -2,7 +2,7 @@
     include('config/db_connect.php');
 
     if(isset($_POST['delete'])){
-        $id_to_delete = mysqli_real_escape_string($conn, $_POST['id-to-delete']);
+        $id_to_delete = mysqli_real_escape_string($conn, ($_POST['id-to-delete']));
 
         $sql = "DELETE FROM pizza WHERE id = $id_to_delete";
 
@@ -42,7 +42,10 @@
 
             <form action="details.php" method="POST">
                 <input type="hidden" name="id-to-delete" value="<?php echo htmlspecialchars($pizza['id']) ?>">
-                <input type="submit" name="delete" value="Delete" class="btn brand z-depth-0">
+                <?php if(isset($_SESSION['Uid'])  &&  ($_SESSION['email'] == $pizza['email'])){
+                echo '<input type="submit" name="delete" value="Delete" class="btn brand z-depth-0">' ;
+                }
+                ?>
             </form>
         <?php else:?>
             <h2>Pizza not available</h2>
